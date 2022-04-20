@@ -21,6 +21,7 @@ public class DragNRoll : MonoBehaviour
             {
                 heldGameObject = hit.rigidbody;
                 heldGameObject.useGravity = false;
+                heldGameObject.drag = 20f;
 
                 Cursor.visible = false;
             }
@@ -32,6 +33,9 @@ public class DragNRoll : MonoBehaviour
             if (heldGameObject != null)
             {
                 heldGameObject.useGravity = true;
+                heldGameObject.drag = 0.1f;
+
+                heldGameObject.angularVelocity *= 10;
 
                 heldGameObject = null;
                 Cursor.visible = true;
@@ -43,7 +47,8 @@ public class DragNRoll : MonoBehaviour
             var screenPosition = new Vector3(Input.mousePosition.x, Input.mousePosition.y, cam.WorldToScreenPoint(heldGameObject.position).z);
             var worldPosition = cam.ScreenToWorldPoint(screenPosition);
             var distanceDelta = new Vector3(worldPosition.x, 2f, worldPosition.z) - heldGameObject.position;
-            heldGameObject.AddForce(distanceDelta, ForceMode.Force);
+            heldGameObject.AddForce(distanceDelta * 1000, ForceMode.Force);
+            heldGameObject.AddForceAtPosition(distanceDelta, Vector3.up);
         }
     }
 }
