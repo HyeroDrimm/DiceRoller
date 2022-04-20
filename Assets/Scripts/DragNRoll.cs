@@ -51,4 +51,10 @@ public class DragNRoll : MonoBehaviour
             heldGameObject.AddForceAtPosition(distanceDelta, Vector3.up);
         }
     }
+
+    public void SelfRollDice(Rigidbody dice)
+    {
+        dice.AddForceAtPosition(Vector3.up * 20000, new Vector3(Random.value * 2 - 1, Random.value * 2 - 1, Random.value * 2 - 1));
+        dice.AddForce(new Vector3(Random.value * 2 - 1, Random.value * 2 - 1, Random.value * 2 - 1) * 20000);
+    }
 }
