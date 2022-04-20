@@ -22,6 +22,7 @@ public class DragNRoll : MonoBehaviour
                 heldGameObject = hit.rigidbody;
                 heldGameObject.useGravity = false;
                 heldGameObject.drag = 20f;
+                heldGameObject.GetComponent<Dice>().IsDiceThrown = true;
 
                 Cursor.visible = false;
             }
