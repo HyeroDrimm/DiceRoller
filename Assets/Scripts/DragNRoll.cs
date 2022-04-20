@@ -35,6 +35,8 @@ public class DragNRoll : MonoBehaviour
                 heldGameObject.useGravity = true;
                 heldGameObject.drag = 0.1f;
 
+                heldGameObject.GetComponent<Dice>().IsDiceThrown = true;
+
                 heldGameObject.angularVelocity *= 10;
 
                 heldGameObject = null;
