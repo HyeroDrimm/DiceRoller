@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 
 public class DragNRoll : MonoBehaviour
@@ -60,7 +61,13 @@ public class DragNRoll : MonoBehaviour
     {
         dice.AddForceAtPosition(Vector3.up * 20000, new Vector3(Random.value * 2 - 1, Random.value * 2 - 1, Random.value * 2 - 1));
         dice.AddForce(new Vector3(Random.value * 2 - 1, Random.value * 2 - 1, Random.value * 2 - 1) * 20000);
-        dice.GetComponent<Dice>().IsDiceThrown = true;
+        StartCoroutine(WaitAndRegisterDiceThrown(dice));
         globalChannel.RaiseDiceThrown();
+    }
+
+    private IEnumerator WaitAndRegisterDiceThrown(Rigidbody dice)
+    {
+        yield return new WaitForSeconds(0.1f);
+        dice.GetComponent<Dice>().IsDiceThrown = true;
     }
 }

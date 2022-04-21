@@ -2055,5 +2055,30 @@ PrefabInstance:
       propertyPath: m_AdditionalShaderChannelsFlag
       value: 25
       objectReference: {fileID: 0}
+    - target: {fileID: 6795753066595331549, guid: fdb042817d5e16b4eb2c85bbe57a2c62,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.96295106
+      objectReference: {fileID: 0}
+    - target: {fileID: 6795753066595331549, guid: fdb042817d5e16b4eb2c85bbe57a2c62,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6795753066595331549, guid: fdb042817d5e16b4eb2c85bbe57a2c62,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6795753066595331549, guid: fdb042817d5e16b4eb2c85bbe57a2c62,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0.26967627
+      objectReference: {fileID: 0}
+    - target: {fileID: 6795753066595331549, guid: fdb042817d5e16b4eb2c85bbe57a2c62,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: -31.29
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: fdb042817d5e16b4eb2c85bbe57a2c62, type: 3}
