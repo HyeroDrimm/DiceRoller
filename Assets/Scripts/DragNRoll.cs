@@ -25,6 +25,7 @@ public class DragNRoll : MonoBehaviour
                 heldGameObject = hit.rigidbody;
                 heldGameObject.useGravity = false;
                 heldGameObject.drag = 20f;
+                heldGameObject.mass = 50f;
 
 
                 Cursor.visible = false;
@@ -37,7 +38,8 @@ public class DragNRoll : MonoBehaviour
             if (heldGameObject != null)
             {
                 heldGameObject.useGravity = true;
-                heldGameObject.drag = 0.1f;
+                heldGameObject.drag = 0.5f;
+                heldGameObject.mass = 125f;
 
                 heldGameObject.GetComponent<Dice>().IsDiceThrown = true;
                 globalChannel.RaiseDiceThrown();
@@ -59,8 +61,8 @@ public class DragNRoll : MonoBehaviour
 
     public void SelfRollDice(Rigidbody dice)
     {
-        dice.AddForceAtPosition(Vector3.up * 20000, new Vector3(Random.value * 2 - 1, Random.value * 2 - 1, Random.value * 2 - 1));
-        dice.AddForce(new Vector3(Random.value * 2 - 1, Random.value * 2 - 1, Random.value * 2 - 1) * 20000);
+        dice.AddForceAtPosition(Vector3.up * 2e4f, new Vector3(Random.value * 2 - 1, Random.value * 2 - 1, Random.value * 2 - 1));
+        dice.AddForce(new Vector3(Random.value * 2 - 1, Random.value * 2 - 1, Random.value * 2 - 1) * 5e4f);
         StartCoroutine(WaitAndRegisterDiceThrown(dice));
         globalChannel.RaiseDiceThrown();
     }
