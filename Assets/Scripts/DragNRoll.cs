@@ -2,6 +2,8 @@ using UnityEngine;
 
 public class DragNRoll : MonoBehaviour
 {
+    [SerializeField] private GlobalChannelSO globalChannel;
+
     private Rigidbody heldGameObject;
     private Camera cam;
     private LayerMask diceLayerMask;
@@ -22,7 +24,7 @@ public class DragNRoll : MonoBehaviour
                 heldGameObject = hit.rigidbody;
                 heldGameObject.useGravity = false;
                 heldGameObject.drag = 20f;
-                heldGameObject.GetComponent<Dice>().IsDiceThrown = true;
+
 
                 Cursor.visible = false;
             }
@@ -37,15 +39,14 @@ public class DragNRoll : MonoBehaviour
                 heldGameObject.drag = 0.1f;
 
                 heldGameObject.GetComponent<Dice>().IsDiceThrown = true;
-
-                heldGameObject.angularVelocity *= 10;
+                globalChannel.RaiseDiceThrown();
 
                 heldGameObject = null;
                 Cursor.visible = true;
             }
         }
 
-        if(heldGameObject != null)
+        if (heldGameObject != null)
         {
             var screenPosition = new Vector3(Input.mousePosition.x, Input.mousePosition.y, cam.WorldToScreenPoint(heldGameObject.position).z);
             var worldPosition = cam.ScreenToWorldPoint(screenPosition);
@@ -60,5 +61,6 @@ public class DragNRoll : MonoBehaviour
         dice.AddForceAtPosition(Vector3.up * 20000, new Vector3(Random.value * 2 - 1, Random.value * 2 - 1, Random.value * 2 - 1));
         dice.AddForce(new Vector3(Random.value * 2 - 1, Random.value * 2 - 1, Random.value * 2 - 1) * 20000);
         dice.GetComponent<Dice>().IsDiceThrown = true;
+        globalChannel.RaiseDiceThrown();
     }
 }

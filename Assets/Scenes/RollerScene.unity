@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.45037985, g: 0.50039387, b: 0.57525253, a: 1}
+  m_IndirectSpecularColor: {r: 0.45038033, g: 0.50039464, b: 0.57525396, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -635,7 +635,7 @@ GameObject:
   m_Component:
   - component: {fileID: 537057790}
   m_Layer: 5
-  m_Name: Sum
+  m_Name: Total
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -767,6 +767,7 @@ GameObject:
   - component: {fileID: 558812733}
   - component: {fileID: 558812732}
   - component: {fileID: 558812731}
+  - component: {fileID: 558812735}
   m_Layer: 5
   m_Name: UICanvas
   m_TagString: Untagged
@@ -855,6 +856,21 @@ RectTransform:
   m_AnchoredPosition: {x: 8.81, y: 1.05}
   m_SizeDelta: {x: 240, y: 180}
   m_Pivot: {x: 0, y: 0}
+--- !u!114 &558812735
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 558812730}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 81621b5599eeb4f468ef79486dc335ad, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  globalChannel: {fileID: 11400000, guid: e07a0bb18b615cd45942feba0a7cf870, type: 2}
+  resultText: {fileID: 2046207893}
+  totalText: {fileID: 899381584}
 --- !u!1 &695542734
 GameObject:
   m_ObjectHideFlags: 0
@@ -1275,7 +1291,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: '?'
+  m_text: 0
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -1362,7 +1378,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1140026710}
   m_Layer: 5
-  m_Name: CurrentRoll
+  m_Name: Result
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1583,6 +1599,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0c5631c0033e75940b75c7e2a1a7ab51, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  globalChannel: {fileID: 11400000, guid: e07a0bb18b615cd45942feba0a7cf870, type: 2}
 --- !u!4 &1823714685
 Transform:
   m_ObjectHideFlags: 0
