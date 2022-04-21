@@ -4,15 +4,17 @@ public class Dice : MonoBehaviour
 {
     [SerializeField] GlobalChannelSO globalChannel;
     [SerializeField] private DiceSide[] sides;
+    [SerializeField] private Transform centerOfMass;
     private bool isDiceThrown = false;
     private Rigidbody rb;
     private Vector3 comebackPosition = new Vector3(-2, 2, -4);
 
     public bool IsDiceThrown { get => isDiceThrown; set => isDiceThrown = value; }
 
-    private void Start()
+    private void Awake()
     {
         rb = GetComponent<Rigidbody>();
+        rb.centerOfMass = centerOfMass.localPosition;
     }
 
     private void Update()
