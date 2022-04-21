@@ -59,5 +59,6 @@ public class DragNRoll : MonoBehaviour
     {
         dice.AddForceAtPosition(Vector3.up * 20000, new Vector3(Random.value * 2 - 1, Random.value * 2 - 1, Random.value * 2 - 1));
         dice.AddForce(new Vector3(Random.value * 2 - 1, Random.value * 2 - 1, Random.value * 2 - 1) * 20000);
+        dice.GetComponent<Dice>().IsDiceThrown = true;
     }
 }

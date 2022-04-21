@@ -31,7 +31,6 @@ public class Dice : MonoBehaviour
         {
             if (diceSide.OnStop(out int number))
             {
-                print(number);
                 globalChannel.RaiseNumberLanded(number);
             }
         }
