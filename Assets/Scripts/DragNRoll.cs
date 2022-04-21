@@ -4,6 +4,7 @@ using UnityEngine;
 public class DragNRoll : MonoBehaviour
 {
     [SerializeField] private GlobalChannelSO globalChannel;
+    [SerializeField] private float speedAfterIsRandom = 6;
 
     private Rigidbody heldGameObject;
     private Camera cam;
@@ -37,15 +38,31 @@ public class DragNRoll : MonoBehaviour
         {
             if (heldGameObject != null)
             {
-                heldGameObject.useGravity = true;
-                heldGameObject.drag = 0.5f;
-                heldGameObject.mass = 125f;
+                if (heldGameObject.velocity.magnitude + heldGameObject.angularVelocity.magnitude >= speedAfterIsRandom)
+                {
+                    heldGameObject.useGravity = true;
+                    heldGameObject.drag = 0.5f;
+                    heldGameObject.mass = 125f;
 
-                heldGameObject.GetComponent<Dice>().IsDiceThrown = true;
-                globalChannel.RaiseDiceThrown();
+                    heldGameObject.GetComponent<Dice>().IsDiceThrown = true;
+                    globalChannel.RaiseDiceThrown();
 
-                heldGameObject = null;
-                Cursor.visible = true;
+                    heldGameObject = null;
+                    Cursor.visible = true;
+                }
+                else
+                {
+                    Debug.Log("Too low Speed for Throw");
+                    heldGameObject.angularVelocity = Vector3.zero;
+                    heldGameObject.velocity = Vector3.zero;
+
+                    heldGameObject.useGravity = true;
+                    heldGameObject.drag = 0.5f;
+                    heldGameObject.mass = 125f;
+
+                    heldGameObject = null;
+                    Cursor.visible = true;
+                }
             }
         }
 
