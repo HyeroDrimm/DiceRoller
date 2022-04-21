@@ -19,7 +19,14 @@ public class Dice : MonoBehaviour
     {
         if (isDiceThrown == true && rb.velocity == Vector3.zero && rb.angularVelocity == Vector3.zero)
         {
-            OnDiceStoped();
+            isDiceThrown = false;
+            foreach (var diceSide in sides)
+            {
+                if (diceSide.OnStop(out int number))
+                {
+                    globalChannel.RaiseNumberLanded(number);
+                }
+            }
         }
 
         if (transform.position.y < -10)
@@ -27,20 +34,6 @@ public class Dice : MonoBehaviour
             rb.MovePosition(comebackPosition);
             rb.velocity = Vector3.zero;
             rb.angularVelocity = Vector3.zero;
-        }
-    }
-
-
-
-    private void OnDiceStoped()
-    {
-        isDiceThrown = false;
-        foreach (var diceSide in sides)
-        {
-            if (diceSide.OnStop(out int number))
-            {
-                globalChannel.RaiseNumberLanded(number);
-            }
         }
     }
 }

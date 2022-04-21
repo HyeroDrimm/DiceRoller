@@ -21,7 +21,7 @@ public class DragNRoll : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Mouse0))
         {
             heldGameObject = null;
-            if (Physics.Raycast(cam.ScreenPointToRay(Input.mousePosition), out RaycastHit hit, 10e3f, diceLayerMask))
+            if (Physics.Raycast(cam.ScreenPointToRay(Input.mousePosition), out RaycastHit hit, 1e3f, diceLayerMask))
             {
                 heldGameObject = hit.rigidbody;
                 heldGameObject.useGravity = false;
@@ -33,36 +33,27 @@ public class DragNRoll : MonoBehaviour
             }
         }
 
-
         if (Input.GetKeyUp(KeyCode.Mouse0))
         {
             if (heldGameObject != null)
             {
                 if (heldGameObject.velocity.magnitude + heldGameObject.angularVelocity.magnitude >= speedAfterIsRandom)
                 {
-                    heldGameObject.useGravity = true;
-                    heldGameObject.drag = 0.5f;
-                    heldGameObject.mass = 125f;
-
                     heldGameObject.GetComponent<Dice>().IsDiceThrown = true;
                     globalChannel.RaiseDiceThrown();
-
-                    heldGameObject = null;
-                    Cursor.visible = true;
                 }
                 else
                 {
                     Debug.Log("Too low Speed for Throw");
                     heldGameObject.angularVelocity = Vector3.zero;
                     heldGameObject.velocity = Vector3.zero;
-
-                    heldGameObject.useGravity = true;
-                    heldGameObject.drag = 0.5f;
-                    heldGameObject.mass = 125f;
-
-                    heldGameObject = null;
-                    Cursor.visible = true;
                 }
+                heldGameObject.useGravity = true;
+                heldGameObject.drag = 0.5f;
+                heldGameObject.mass = 300f;
+
+                heldGameObject = null;
+                Cursor.visible = true;
             }
         }
 
@@ -71,15 +62,15 @@ public class DragNRoll : MonoBehaviour
             var screenPosition = new Vector3(Input.mousePosition.x, Input.mousePosition.y, cam.WorldToScreenPoint(heldGameObject.position).z);
             var worldPosition = cam.ScreenToWorldPoint(screenPosition);
             var distanceDelta = new Vector3(worldPosition.x, 2f, worldPosition.z) - heldGameObject.position;
-            heldGameObject.AddForce(distanceDelta * 1000, ForceMode.Force);
-            heldGameObject.AddForceAtPosition(distanceDelta, Vector3.up);
+            heldGameObject.AddForce(distanceDelta * 1e3f, ForceMode.Force);
+            heldGameObject.AddForceAtPosition(distanceDelta * 10f, Vector3.up);
         }
     }
 
     public void SelfRollDice(Rigidbody dice)
     {
-        dice.AddForceAtPosition(Vector3.up * 2e4f, new Vector3(Random.value * 2 - 1, Random.value * 2 - 1, Random.value * 2 - 1));
-        dice.AddForce(new Vector3(Random.value * 2 - 1, Random.value * 2 - 1, Random.value * 2 - 1) * 5e4f);
+        dice.AddTorque(new Vector3(Random.value * 2 - 1, Random.value * 2 - 1, Random.value * 2 - 1) * 5e4f);
+        dice.AddForce(Vector3.up * 8e4f);
         StartCoroutine(WaitAndRegisterDiceThrown(dice));
         globalChannel.RaiseDiceThrown();
     }

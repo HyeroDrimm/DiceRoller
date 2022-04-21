@@ -11,7 +11,7 @@ public class UIController : MonoBehaviour
     private void Awake()
     {
         globalChannel.onNumberLanded += UpdateScore;
-        globalChannel.onDiceThrown += DiceThrown;
+        globalChannel.onDiceThrown += () => resultText.text = "?";
     }
 
     private void UpdateScore(int number)
@@ -20,10 +20,5 @@ public class UIController : MonoBehaviour
 
         resultText.text = number.ToString();
         totalText.text = totalNum.ToString();
-    }
-
-    private void DiceThrown()
-    {
-        resultText.text = "?";
     }
 }
