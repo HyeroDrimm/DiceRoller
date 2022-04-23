@@ -49,8 +49,8 @@ public class DragNRoll : MonoBehaviour
                     heldGameObject.velocity = Vector3.zero;
                 }
                 heldGameObject.useGravity = true;
-                heldGameObject.drag = 0.5f;
-                heldGameObject.mass = 300f;
+                heldGameObject.drag = 0.1f;
+                heldGameObject.mass = 1e3f;
 
                 heldGameObject = null;
                 Cursor.visible = true;
